@@ -13,6 +13,7 @@
 <button type="button" (click)="setFirstName('Ryan'); setLastName('Maffit')">Set to Ryan Maffit</button>
 <button type="button" (click)="setFirstName('Michael'); setLastName('Terry')">Set to Michael Terry</button>
 <button type="button" (click)="setFirstName('Larry'); setLastName('Fritz')">Set to Larry Fritz</button>
+<button type="button" (click)="ngOnDestroy()">Destroy</button>
 
 <hr />
 
@@ -26,3 +27,5 @@
   <dt><a href="https://agify.io/">agify.io</a> Age</dt>
   <dd>{{ (age$ | async) ?? 'N/A' }}</dd>
 </dl>
+
+<pre>{{ agify$ | async | json }}</pre>

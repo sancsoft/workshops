@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NameService } from './name.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, combineLatest, debounceTime, distinctUntilChanged, filter, map, shareReplay, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, combineLatest, debounce, debounceTime, distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, takeUntil, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface AgifyResponse {
@@ -26,6 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public fullName$: Observable<string>;
 
   public age$: Observable<number>;
+
+  public agify$: Observable<AgifyResponse>;
 
   constructor(private nameService: NameService, private route: ActivatedRoute, private httpClient: HttpClient) {
     const firstName$ = this.nameService.firstName$;
@@ -63,9 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
       filter(t => !!t),
       debounceTime(500),
       distinctUntilChanged(),
+      tap(firstName => console.log('First Name: ' + firstName)),
       switchMap(firstName => this.httpClient.get<AgifyResponse>(`https://api.agify.io/?name=${firstName}`)),
+      tap(agifyResponse => console.log(agifyResponse)),
       shareReplay(1)
     );
+
+    this.agify$ = agify$;
 
     this.age$ = agify$.pipe(
       map(t => t.age)
