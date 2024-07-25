@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Advanced Angular</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/nested" routerLinkActive="active">Nested</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/protected" routerLinkActive="active">Protected</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container my-5">
+  <router-outlet />
+</div>

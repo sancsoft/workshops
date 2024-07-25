@@ -1,0 +1,9 @@
+<h1>Advaned Angular</h1>
+
+@if(appService.loggedIn$ | async) {
+    <p>You are logged in!</p>
+    <p><button type="button" class="btn btn-primary" (click)="appService.logout()">Logout</button>
+} @else {
+    <p>You are not logged in! Click below to login.</p>
+    <p><button type="button" class="btn btn-primary" (click)="appService.login()">Login</button>
+}
